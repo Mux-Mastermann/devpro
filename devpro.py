@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from github import Github
 from sens import token
 from sys import argv
