@@ -30,19 +30,19 @@ Running python scripts from any directory on your machine highly depends on your
 
 The following instructions worked for me under Windows 10 and using customized [Hyper](https://hyper.is/) as command-line interface:
 1. Add the path of the devpro directory to Windows "PATH" system variable:
-  1. Open Explorer
-  2. Right-click on "My Computer"
-  3. Click "Properties"
-  4. Click "Advanced system settings"
-  5. Select tab "Advanced"
-  6. Click "Environment Variables"
-  7. Select "Path"
-  8. Click "Edit"
-  9. Click "New"
-  10. Add path to the created directory, e.g "C:\Users\Your Name\devpro"
+   1. Open Explorer
+   2. Right-click on "My Computer"
+   3. Click "Properties"
+   4. Click "Advanced system settings"
+   5. Select tab "Advanced"
+   6. Click "Environment Variables"
+   7. Select "Path"
+   8. Click "Edit"
+   9. Click "New"
+   10. Add path to the created directory, e.g "C:\Users\Your Name\devpro"
 2. Mark the script as executable:
-  1. `$ cd` inside the devpro folder.
-  2. run `$ chmod +x devpro.py`.
+   1. `$ cd` inside the devpro folder.
+   2. run `$ chmod +x devpro.py`.
 
 ## Features
 - [x] creating project folder and empty README on github and cloning it to your local machine
