@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from github import Github
-from sens import token
+from credentials import token
 from sys import argv
 import subprocess
 
