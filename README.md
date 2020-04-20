@@ -20,8 +20,14 @@ This script will create a new Github Repository with the name you provide and wi
 
 Usage:
 ```
-$ devpro.py My_New_Project
+$ devpro.py ProjectName
 ```
+You can provide a second argument, which is called template. This will also create some standard files and folders for you depending on your project:
+```
+$ devpro.py ProjectName website
+```
+Currently available templates are: **website** for static websites and **flask** for web applications
+
 By default you can run this script **only from inside the folder where the script is located.**
 
 ---
@@ -46,9 +52,9 @@ The following instructions worked for me under Windows 10 and using customized [
 
 ## Features
 - [x] creating project folder and empty README on github and cloning it to your local machine
-- [x] included second command-line argument for project related folder and file creation (e.g. automatic creation of standard files and folders for a static website)
-  - [x] Static website
-  - [x] Flask web application
+- [x] included second command-line argument for project related folder and file creation
+  - [x] Static website (Template: "website")
+  - [x] Flask web application (Template: "flask")
 
 ## Credits
 @rpreissel for knowing all the answers to my questions within a second and for leaving me a bit smarter than before after really every developer talk we have.
