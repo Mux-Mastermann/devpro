@@ -46,12 +46,11 @@ The following instructions worked for me under Windows 10 and using customized [
 
 ## Features
 - [x] creating project folder and empty README on github and cloning it to your local machine
-- [ ] included second command-line argument for project related folder and file creation (e.g. automatic creation of standard files and folders for a static website)
-  - [ ] Static website
-  - [ ] Flask web application
+- [x] included second command-line argument for project related folder and file creation (e.g. automatic creation of standard files and folders for a static website)
+  - [x] Static website
+  - [x] Flask web application
 
 ## Credits
 @rpreissel for knowing all the answers to my questions within a second and for leaving me a bit smarter than before after really every developer talk we have.
 
 [Corey Schafer](https://www.youtube.com/user/schafer5) for your great YouTube videos about Python.
- 
