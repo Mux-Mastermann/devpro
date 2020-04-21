@@ -7,13 +7,18 @@ import subprocess
 
 
 def main():
+    bool_boilerplate = False
+
     # checking if all args provided
     if not len(argv) in range(2, 4):
         print("Usage: devpro.py reponame [optional:template]")
         quit()
 
+    if len(argv) == 3:
+        bool_boilerplate = True
+
     # check if second argument provided
-    if argv[2]:
+    if bool_boilerplate:
         # list of all available Templates
         templates = ["website", "flask"]
         # check if provided argument is in templates list
@@ -43,7 +48,7 @@ def main():
     repo.create_file("README.md", "init commit", readme)
 
     # create folders and files depending on second argv
-    if argv[2]:
+    if bool_boilerplate:
         print(f"Creating boilerplate: {argv[2]}")
         create_template(argv[2], repo, repo_name)
 
@@ -56,7 +61,7 @@ def main():
     subprocess.run(cmd_clone)
 
     # create image folder locally, cannot have empty folders on github
-    if argv[2] == "website":
+    if bool_boilerplate:
         subprocess.run(["mkdir", repo_name + "/img"])
 
     print(f"Successfully created your new project {repo_name}")
