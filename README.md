@@ -59,4 +59,10 @@ The following instructions worked for me under Windows 10 and using customized [
 ## Credits
 @rpreissel for knowing all the answers to my questions within a second and for leaving me a bit smarter than before after really every developer talk we have.
 
+@dmalan for taking me on an existing ride through Computer Science and finally revealing that there is no magic happening under the hood. You are a great teacher!
+
 [Corey Schafer](https://www.youtube.com/user/schafer5) for your great YouTube videos about Python.
+
+---
+
+This project was submitted as Final Project on the Harvard CS50x Introduction to Computer Science Course.
