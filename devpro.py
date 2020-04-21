@@ -28,10 +28,12 @@ def main():
     repo_name = argv[1]
 
     # creating instance of github and of github user
+    print("Connecting with Github.com")
     g = Github(token)
     user = g.get_user()
 
     # creating new repository
+    print(f"Creating new repository: {repo_name}")
     repo = user.create_repo(repo_name)
     # checking for error (if repo name already exists for example)
     # TODO
@@ -42,6 +44,7 @@ def main():
 
     # create folders and files depending on second argv
     if argv[2]:
+        print(f"Creating boilerplate: {argv[2]}")
         create_template(argv[2], repo, repo_name)
 
     # getting the new repo url
@@ -55,6 +58,8 @@ def main():
     # create image folder locally, cannot have empty folders on github
     if argv[2] == "website":
         subprocess.run(["mkdir", repo_name + "/img"])
+
+    print(f"Successfully created your new project {repo_name}")
 
 
 def create_template(temp, repo, repo_name):

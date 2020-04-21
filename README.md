@@ -22,11 +22,11 @@ Usage:
 ```
 $ devpro.py ProjectName
 ```
-You can provide a second argument, which is called template. This will also create some standard files and folders for you depending on your project:
+You can provide a second argument, which is called boilerplate. This will also create some standard files and folders for you depending on your project:
 ```
 $ devpro.py ProjectName website
 ```
-Currently available templates are: **website** for static websites and **flask** for web applications
+Currently available boilerplates are: **website** for static websites and **flask** for web applications
 
 By default you can run this script **only from inside the folder where the script is located.**
 
@@ -52,9 +52,9 @@ The following instructions worked for me under Windows 10 and using customized [
 
 ## Features
 - [x] creating project folder and empty README on github and cloning it to your local machine
-- [x] included second command-line argument for project related folder and file creation
-  - [x] Static website (Template: "website")
-  - [x] Flask web application (Template: "flask")
+- [x] included second command-line argument for project related folder and file creation (boilerplates)
+  - [x] Static website (Boilerplate: "website")
+  - [x] Flask web application (Boilerplate: "flask")
 
 ## Credits
 @rpreissel for knowing all the answers to my questions within a second and for leaving me a bit smarter than before after really every developer talk we have.
