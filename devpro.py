@@ -1,9 +1,30 @@
 #!/usr/bin/env python
 
+import subprocess
+import json
+
 from github import Github
 from credentials import token
 from sys import argv
-import subprocess
+
+
+# Initial creating the boilerplates.json file (Delete or comment out later)
+
+Files = ["index.html", "css/styles.css", "js/functions.js"]
+Folders = ["/img"]
+Struct = {"Files": Files, "Empty_Folders": Folders}
+Boilerplates = {"website": Struct}
+
+Files = ["application.py", "static/styles.css", "templates/index.html"]
+Folders = []
+Boilerplates.update({"flask": {"Files": Files, "Empty_Folders": Folders}})
+
+print(Boilerplates)
+
+with open("boilerplates.json", "w") as write_file:
+    json.dump(Boilerplates, write_file, indent=4)
+
+quit()
 
 
 def main():

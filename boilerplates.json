@@ -1,0 +1,20 @@
+{
+    "website": {
+        "Files": [
+            "index.html",
+            "css/styles.css",
+            "js/functions.js"
+        ],
+        "Empty_Folders": [
+            "/img"
+        ]
+    },
+    "flask": {
+        "Files": [
+            "application.py",
+            "static/styles.css",
+            "templates/index.html"
+        ],
+        "Empty_Folders": []
+    }
+}
