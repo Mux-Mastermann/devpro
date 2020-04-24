@@ -2,52 +2,47 @@
 
 import subprocess
 import json
+import os
 
 from github import Github
 from credentials import token
 from sys import argv
 
 
-# Initial creating the boilerplates.json file (Delete or comment out later)
-
-Files = ["index.html", "css/styles.css", "js/functions.js"]
-Folders = ["/img"]
-Struct = {"Files": Files, "Empty_Folders": Folders}
-Boilerplates = {"website": Struct}
-
-Files = ["application.py", "static/styles.css", "templates/index.html"]
-Folders = []
-Boilerplates.update({"flask": {"Files": Files, "Empty_Folders": Folders}})
-
-print(Boilerplates)
-
-with open("boilerplates.json", "w") as write_file:
-    json.dump(Boilerplates, write_file, indent=4)
-
-quit()
-
-
 def main():
+    # getting the location of the script
+    script_dir = os.path.dirname(__file__)
+    # Definining Keyword for creating and changing boilerplates
+    KEYWORD_BOILERPLATE = "boilerplate"
+    # Indicates if boilerplate was entered by user
     bool_boilerplate = False
 
     # checking if all args provided
     if not len(argv) in range(2, 4):
-        print("Usage: devpro.py reponame [optional:template]")
+        print("Usage: devpro.py reponame [optional:boilerplate]")
         quit()
 
     if len(argv) == 3:
         bool_boilerplate = True
+        # capturing the entered boilerplate in variable
+        boilerplate = argv[2].lower()
 
-    # check if second argument provided
-    if bool_boilerplate:
-        # list of all available Templates
-        templates = ["website", "flask"]
-        # check if provided argument is in templates list
-        if not argv[2].lower() in templates:
-            print(f"Template {argv[2]} not available. Available "
-                  "Templates: ", end="")
-            for item in templates:
-                print(f"{item}", end=" ")
+        # load boilerplates.json to a dict
+        with open(script_dir + "/boilerplates.json", "r") as read_file:
+            boilerplates = json.load(read_file)
+
+        # check if the Keyword for CRUD boilerplates was entered
+        if boilerplate == KEYWORD_BOILERPLATE:
+            # Run a CRUD function for the boilerplate
+            CRUD_boilerplates(argv[1], boilerplates)
+            quit()
+        # check if entered boilerplate exists in boilerplates
+        elif boilerplate not in boilerplates.keys():
+            print(f"The boilerplate '{boilerplate}' does not exist.\n"
+                  "You can create boilerplates with keyword: 'boilerplate'\n"
+                  "Available boilerplates are:")
+            for key in boilerplates.keys():
+                print(f"- {key}")
             quit()
 
     # setting new repo name
@@ -68,10 +63,11 @@ def main():
     readme = "# " + repo_name
     repo.create_file("README.md", "init commit", readme)
 
-    # create folders and files depending on second argv
+    # create all files depending on boilerplate
     if bool_boilerplate:
-        print(f"Creating boilerplate: {argv[2]}")
-        create_template(argv[2], repo, repo_name)
+        print(f"Creating boilerplate: {boilerplate}")
+        files = boilerplates[boilerplate]["Files"]
+        [repo.create_file(file, "init commit", "") for file in files if files]
 
     # getting the new repo url
     repo_url = repo.git_url
@@ -81,23 +77,16 @@ def main():
     # running the command
     subprocess.run(cmd_clone)
 
-    # create image folder locally, cannot have empty folders on github
+    # create empty folders locally, cannot have empty folders on github
     if bool_boilerplate:
-        subprocess.run(["mkdir", repo_name + "/img"])
+        folders = boilerplates[boilerplate]["Empty_Folders"]
+        [os.makedirs(repo_name + folder) for folder in folders if folders]
 
     print(f"Successfully created your new project {repo_name}")
 
 
-def create_template(temp, repo, repo_name):
-    if temp == "website":
-        # create files
-        repo.create_file("index.html", "init commit", "")
-        repo.create_file("css/styles.css", "init commit", "")
-        repo.create_file("js/functions.js", "init commit", "")
-    elif temp == "flask":
-        repo.create_file("application.py", "init commit", "")
-        repo.create_file("static/styles.css", "init commit", "")
-        repo.create_file("templates/index.html", "init commit", "")
+def CRUD_boilerplates(name, boilerplates):
+    print("# TODO: Create a CRUD function for boilerplates")
 
 
 if __name__ == "__main__":
