@@ -9,9 +9,11 @@ from credentials import token
 from sys import argv
 
 
+# getting the location of the script
+script_dir = os.path.dirname(__file__)
+
+
 def main():
-    # getting the location of the script
-    script_dir = os.path.dirname(__file__)
     # Definining Keyword for creating and changing boilerplates
     KEYWORD_BOILERPLATE = "boilerplate"
     # Indicates if boilerplate was entered by user
@@ -33,8 +35,8 @@ def main():
 
         # check if the Keyword for CRUD boilerplates was entered
         if boilerplate == KEYWORD_BOILERPLATE:
-            # Run a CRUD function for the boilerplate
-            CRUD_boilerplates(argv[1], boilerplates)
+            # Run create function for the boilerplate
+            create_boilerplates(argv[1], boilerplates)
             quit()
         # check if entered boilerplate exists in boilerplates
         elif boilerplate not in boilerplates.keys():
@@ -85,8 +87,44 @@ def main():
     print(f"Successfully created your new project {repo_name}")
 
 
-def CRUD_boilerplates(name, boilerplates):
-    print("# TODO: Create a CRUD function for boilerplates")
+def create_boilerplates(name, boilerplates):
+    # check if boilerplate already exists
+    if name in boilerplates.keys():
+        print(f"Boilerplate '{name}' already exists.")
+        quit()
+
+    add_files = []
+    add_folders = []
+    # get index of the root directory
+    slicer = len(os.getcwd()) + 1
+    # walk trough all directories in current working directory
+    for path, dirs, files in os.walk(os.getcwd(), topdown=True):
+        # removing hidden folders (starting with ".")
+        dirs[:] = [d for d in dirs if not d.startswith(".")]
+        # replacing backslash with slash
+        path = path.replace("\\", "/")
+
+        # check if files in dir
+        if files:
+            # check if not the root path
+            if not path[slicer:]:
+                # add all files from this directory to append list
+                add_files.extend(files)
+            else:
+                # add path to the file, then add it to append list
+                add_files.extend([path[slicer:] + "/" + file
+                                  for file in files])
+            # go to next dir
+            continue
+        elif not dirs:
+            add_folders.append("/" + path[slicer:])
+    # add files and folders to a new key in boilerplates dict
+    boilerplates.update({name: {"Files": add_files,
+                                "Empty_Folders": add_folders}})
+    # serialize boilerplates dict back to boilerplates.json
+    with open(script_dir + "/boilerplates.json", "w") as write_file:
+        json.dump(boilerplates, write_file, indent=4)
+    print(f"Boilerplate '{name}' successfully created!")
 
 
 if __name__ == "__main__":

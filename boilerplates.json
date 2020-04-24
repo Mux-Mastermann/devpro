@@ -16,5 +16,16 @@
             "templates/index.html"
         ],
         "Empty_Folders": []
+    },
+    "TestBoiler": {
+        "Files": [
+            "index.html",
+            "css/styles.css"
+        ],
+        "Empty_Folders": [
+            "/img/cats",
+            "/img/dogs/puppies",
+            "/js"
+        ]
     }
 }
