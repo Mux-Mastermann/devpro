@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#! python
 
 import subprocess
 import json
@@ -9,7 +9,7 @@ from credentials import token
 from sys import argv
 
 
-# getting the location of the script
+# getting the location of the devpro script
 script_dir = os.path.dirname(__file__)
 
 
@@ -70,6 +70,8 @@ def main():
         print(f"Creating boilerplate: {boilerplate}")
         files = boilerplates[boilerplate]["Files"]
         [repo.create_file(file, "init commit", "") for file in files if files]
+        files = boilerplates[boilerplate]["Empty_Folders"]
+        [repo.create_file(file, "init commit", "") for file in files if files]
 
     # getting the new repo url
     repo_url = repo.git_url
@@ -78,12 +80,7 @@ def main():
     cmd_clone = ["git", "clone", repo_url]
     # running the command
     subprocess.run(cmd_clone)
-
-    # create empty folders locally, cannot have empty folders on github
-    if bool_boilerplate:
-        folders = boilerplates[boilerplate]["Empty_Folders"]
-        [os.makedirs(repo_name + folder) for folder in folders if folders]
-
+    # Printing Success-Message
     print(f"Successfully created your new project {repo_name}")
 
 
@@ -91,8 +88,14 @@ def create_boilerplates(name, boilerplates):
     # check if boilerplate already exists
     if name in boilerplates.keys():
         print(f"Boilerplate '{name}' already exists.")
+        print("Do you want to open the boilerplate.json to edit or delete?")
+        answer = input()
+        if answer.lower() in ["yes", "y"]:
+            # Open boilerplates.json
+            os.system(f"notepad {script_dir}/boilerplates.json")
         quit()
 
+    # create new boilerplate:
     add_files = []
     add_folders = []
     # get index of the root directory
@@ -117,7 +120,8 @@ def create_boilerplates(name, boilerplates):
             # go to next dir
             continue
         elif not dirs:
-            add_folders.append("/" + path[slicer:])
+            # if empty folder add '.gitkeep' file. Github cant store empty dirs
+            add_folders.append(path[slicer:] + "/.gitkeep")
     # add files and folders to a new key in boilerplates dict
     boilerplates.update({name: {"Files": add_files,
                                 "Empty_Folders": add_folders}})

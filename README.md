@@ -2,6 +2,14 @@
 
 Create new projects on Github and clone it to your PC with just one line of code. Setup your new **dev**elopement **pro**jects in just a second.
 
+## What's new?
+- Added custom boilerplate creation ([Changelog](/CHANGELOG.md))
+
+## Features
+- [x] Create repo on github and clone it to your local machine
+- [x] Create a boilerplate of the needed file and folder structure
+- [x] Make custom boilerplates for later use
+
 ## Prerequisites
 
 To use this script `PyGitHub` needs to be installed on your system. If not already installed, you can install [PyGitHub](https://github.com/PyGithub/PyGithub) by typing the following in a terminal:
@@ -15,22 +23,40 @@ After creating the token you should paste it inside the `credentials_template.py
 token = "YOUR_PERSONAL_ACCESS_TOKEN"
 ```
 Rename the file to `credentials.py`.
+
 ## Usage
 This script will create a new Github Repository with the name you provide and will then clone it to your local machine, precisely inside the folder from which you run the command.
 
 Usage:
 ```
-$ devpro.py ProjectName
+$ devpro.py project_name
 ```
 You can provide a second argument, which is called boilerplate. This will also create some standard files and folders for you depending on your project:
 ```
-$ devpro.py ProjectName website
+$ devpro.py project_name website
 ```
-Currently available boilerplates are: **website** for static websites and **flask** for web applications
+Devpro comes with two available boilerplates (**website** for static websites and **flask** for web applications), which are stored in a `boilerplates.json` file.
 
-By default you can run this script **only from inside the folder where the script is located.**
+#### Custom boilerplates
+As of **v1.1** you can create custom boilerplates. `$ cd` inside the folder, which contains your desired boilerplate files and folders. Then run the following command and make sure to replace `boilerplate_name` with the name you want to give to your custom boilerplate:
+```
+$ devpro.py boilerplate_name boilerplate
+```
+When you use the Keyword `boilerplate` as second command-line argument devpro will walk over all subfolders and files of your current working directory. The gathered structure will be stored as a new boilerplate in the boilerplates.json file. Hidden files, starting with a `.` will be ignored. A `.gitkeep` file will be added to all empty folders because you can't have empty folders on Github.
+
+
+From now on you can use your newly created boilerplate just how in the example above:
+```
+$ devpro.py project_name boilerplate_name
+```
+You can open the `boilerplates.json` with any text editor to update or delete existing boilerplates.
+
+Devpro boilerplates are for quickly creating the project structure not the content. Please be aware that any **files** created from a boilerplate **will be empty!**
 
 ---
+**PLEASE NOTICE:**  
+By default you can run python scripts **only from inside the folder where the script is located.**
+
 Running python scripts from any directory on your machine highly depends on your operating system. I highly recommend to search google for something like:
 > "running python scripts from anywhere under YOUR_OS"
 
@@ -50,12 +76,6 @@ The following instructions worked for me under Windows 10 and using customized [
    1. `$ cd` inside the devpro folder.
    2. run `$ chmod +x devpro.py`.
 
-## Features
-- [x] creating project folder and empty README on github and cloning it to your local machine
-- [x] included second command-line argument for project related folder and file creation (boilerplates)
-  - [x] Static website (Boilerplate: "website")
-  - [x] Flask web application (Boilerplate: "flask")
-
 ## Credits
 [@rpreissel](https://github.com/rpreissel) for knowing all the answers to my questions within a second and for leaving me a bit smarter than before after really every developer talk we have.
 
@@ -65,4 +85,4 @@ The following instructions worked for me under Windows 10 and using customized [
 
 ---
 
-This project was submitted as Final Project on the Harvard CS50x Introduction to Computer Science Course.
+This project (v1.0) was submitted as Final Project on the Harvard CS50x Introduction to Computer Science Course.
