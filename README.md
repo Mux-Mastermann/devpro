@@ -3,7 +3,7 @@
 Create new projects on Github and clone it to your PC with just one line of code. Setup your new **dev**elopement **pro**jects in just a second.
 
 ## What's new?
-- Added custom boilerplate creation ([Changelog](/CHANGELOG.md))
+- Added custom boilerplate creation ([Changelog](/CHANGELOG.md#110---2020-04-25))
 
 ## Features
 - [x] Create repo on github and clone it to your local machine
@@ -38,7 +38,7 @@ $ devpro.py project_name website
 Devpro comes with two available boilerplates (**website** for static websites and **flask** for web applications), which are stored in a `boilerplates.json` file.
 
 #### Custom boilerplates
-As of **v1.1** you can create custom boilerplates. `$ cd` inside the folder, which contains your desired boilerplate files and folders. Then run the following command and make sure to replace `boilerplate_name` with the name you want to give to your custom boilerplate:
+As of **[v1.1](/CHANGELOG.md#110---2020-04-25)** you can create custom boilerplates. `$ cd` inside the folder, which contains your desired boilerplate files and folders. Then run the following command and make sure to replace `boilerplate_name` with the name you want to give to your custom boilerplate:
 ```
 $ devpro.py boilerplate_name boilerplate
 ```
