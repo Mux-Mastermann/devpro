@@ -74,7 +74,7 @@ def main():
         [repo.create_file(file, "init commit", "") for file in files if files]
 
     # getting the new repo url
-    repo_url = repo.git_url
+    repo_url = repo.html_url
 
     # cmd for cloning github repo
     cmd_clone = ["git", "clone", repo_url]
